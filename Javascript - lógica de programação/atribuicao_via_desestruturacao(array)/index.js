@@ -37,8 +37,8 @@
 // const [um, , tres, , cinco, ,sete] = numeros ;
 // console.log(um, tres, cinco);
 
-//  indices         0       1       2
-//                0,1,2   0,1,2   0,1,2
+//  indices            0       1       2
+//                   0,1,2   0,1,2   0,1,2
 // const numeros = [[1,2,3],[4,5,6],[7,8,9]];
 
 // console.log(numeros[1][2]);
