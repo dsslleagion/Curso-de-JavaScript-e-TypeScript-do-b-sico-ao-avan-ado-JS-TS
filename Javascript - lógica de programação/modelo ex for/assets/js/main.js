@@ -5,7 +5,7 @@ const elementos = [
     {tag:'h1', texto:'frase 4'},
 ];
 
-
+0
 // Função para criar elementos e adiciona-los ao DOM
 function criarElementos() {
     const container = document.querySelector('.container'); // Seleciona a div com a classe 'container'
