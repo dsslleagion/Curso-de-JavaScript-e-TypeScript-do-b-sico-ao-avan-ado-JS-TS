@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validação de CPF</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"] {
+      width: 200px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Validação de CPF</h1>
+    <input type="text" id="cpfInput" placeholder="Digite o CPF">
+    <button onclick="validarCPF()">Validar CPF</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function ValidaCPF(cpfEnviado) {
+      Object.defineProperty(this, 'cpfLimpo', {
+        enumerable: true,
+        get: function() {
+          return cpfEnviado.replace(/\D+/g, '');
+        }
+      });
+    }
+
+    ValidaCPF.prototype.valida = function() {
+      if(typeof this.cpfLimpo === 'undefined') return false;
+      if(this.cpfLimpo.length !== 11) return false;
+      if(this.isSequencia()) return false;
+
+      const cpfParcial = this.cpfLimpo.slice(0, -2);
+      const digito1 = this.criaDigito(cpfParcial);
+      const digito2 = this.criaDigito(cpfParcial + digito1);
+
+      const novoCpf = cpfParcial + digito1 + digito2;
+      return novoCpf === this.cpfLimpo;
+    };
+
+    ValidaCPF.prototype.criaDigito = function(cpfParcial) {
+      const cpfArray = Array.from(cpfParcial);
+
+      let regressivo = cpfArray.length + 1;
+      const total = cpfArray.reduce((ac, val) => {
+        ac += (regressivo * Number(val));
+        regressivo--;
+        return ac;
+      }, 0);
+
+      const digito = 11 - (total % 11);
+      return digito > 9 ? '0' : String(digito);
+    };
+
+    ValidaCPF.prototype.isSequencia = function() {
+      const sequencia = this.cpfLimpo[0].repeat(this.cpfLimpo.length);
+      return sequencia === this.cpfLimpo;
+    };
+
+    function validarCPF() {
+      const cpfInput = document.getElementById('cpfInput').value;
+      const cpf = new ValidaCPF(cpfInput);
+
+      const resultElement = document.getElementById('result');
+      if(cpf.valida()) {
+        resultElement.textContent = 'CPF válido';
+        resultElement.style.color = 'green';
+      } else {
+        resultElement.textContent = 'CPF inválido';
+        resultElement.style.color = 'red';
+      }
+    }
+  </script>
+</body>
+</html>
