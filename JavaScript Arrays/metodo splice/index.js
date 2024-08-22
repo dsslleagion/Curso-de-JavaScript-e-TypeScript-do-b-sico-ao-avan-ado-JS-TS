@@ -5,7 +5,7 @@
 //pop
 // const removidos = nomes.splice(2,1);
 // console.log(nomes, removidos);
-
+///////////////////////
 //                   -4      -3    -2         -1
 // const nomes = ['Samuel','Tales','James','Rodilfo'];
 
