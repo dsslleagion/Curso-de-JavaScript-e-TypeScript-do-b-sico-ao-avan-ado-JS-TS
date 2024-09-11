@@ -1,0 +1,54 @@
+para descubrir se as versões do javascript conhecido como es6 suporta tais recursos, basta ir ao site "can i use" que la é possivel verificar quais recursos 
+possuem compatibilidade
+
+babel é um transpilador = tradutor e compilador de codigo javascript
+
+site: 
+babel.io
+
+vamos usar o babel apenas como conhecimento porque iremos em seguida usar o webpack que possui babel instalado
+
+e babel nada mais é que o tradutor de codigo javascript recente para antigo
+
+manual 
+
+instalação:
+
+npm init -y
+
+arquivo "package.json" foi criado ára realizar o gereciamento de pacotes do projeto
+
+comando de instalação babel:
+
+npm install --save-dev @babel/cli @babel/preset-env @babel/core
+
+
+criação do arquivo "package-lock.json"
+
+utilizando o babael para desenvolver no sistema 
+
+usando o babel para converter codigo 
+npx babel main.js -o bundle.js --presets=@babel/env
+
+npx babel main.js -o bundle.js 
+
+//colocando no package o comando babel 
+
+{
+  "name": "aulababel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel":"babel ./main.js -o ./bundle.js --presets=@babel/env -w" 
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.25.6",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4"
+  }
+}
