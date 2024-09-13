@@ -1,0 +1,1 @@
+como ativar recursos para navegadores antigos
